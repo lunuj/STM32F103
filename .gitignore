@@ -50,138 +50,14 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
-.cmsis/include/cachel1_armv7.h
-.cmsis/include/cmsis_armcc.h
-.cmsis/include/cmsis_armclang_ltm.h
-.cmsis/include/cmsis_armclang.h
-.cmsis/include/cmsis_compiler.h
-.cmsis/include/cmsis_gcc.h
-.cmsis/include/cmsis_iccarm.h
-.cmsis/include/cmsis_version.h
-.cmsis/include/core_armv8mbl.h
-.cmsis/include/core_armv8mml.h
-.cmsis/include/core_armv81mml.h
-.cmsis/include/core_cm0.h
-.cmsis/include/core_cm0plus.h
-.cmsis/include/core_cm1.h
-.cmsis/include/core_cm3.h
-.cmsis/include/core_cm4.h
-.cmsis/include/core_cm7.h
-.cmsis/include/core_cm23.h
-.cmsis/include/core_cm33.h
-.cmsis/include/core_cm35p.h
-.cmsis/include/core_cm55.h
-.cmsis/include/core_cm85.h
-.cmsis/include/core_sc000.h
-.cmsis/include/core_sc300.h
-.cmsis/include/core_starmc1.h
-.cmsis/include/mpu_armv7.h
-.cmsis/include/mpu_armv8.h
-.cmsis/include/pac_armv81.h
-.cmsis/include/pmu_armv8.h
-.cmsis/include/tz_context.h
-.eide/eide.json
-.eide/target 1.arm.options.v5.json
-.eide/target 1.arm.options.v6.json
-.eide/target 1.files.options.yml
-.eide/deps/RTE_Components.h
-.vscode/keil-assistant.log
-.vscode/launch.json
-.vscode/settings.json
-.vscode/tasks.json
-.vscode/uv4.log
-.vscode/uv4.log.lock
+.cmsis/**
+.eide/**
+.vscode/**
+
 DebugConfig/Target_1_STM32F103C8_1.0.0.dbgconf
 Listings/startup_stm32f10x_md.lst
 .clang-format
 .eide.usr.ctx.json
 test.code-workspace
-Objects/core_cm3.crf
-Objects/main.crf
-Objects/misc.crf
-Objects/stm32f10x_adc.crf
-Objects/stm32f10x_bkp.crf
-Objects/stm32f10x_can.crf
-Objects/stm32f10x_cec.crf
-Objects/stm32f10x_crc.crf
-Objects/stm32f10x_dac.crf
-Objects/stm32f10x_dbgmcu.crf
-Objects/stm32f10x_dma.crf
-Objects/stm32f10x_exti.crf
-Objects/stm32f10x_flash.crf
-Objects/stm32f10x_fsmc.crf
-Objects/stm32f10x_gpio.crf
-Objects/stm32f10x_i2c.crf
-Objects/stm32f10x_it.crf
-Objects/stm32f10x_iwdg.crf
-Objects/stm32f10x_pwr.crf
-Objects/stm32f10x_rcc.crf
-Objects/stm32f10x_rtc.crf
-Objects/stm32f10x_sdio.crf
-Objects/stm32f10x_spi.crf
-Objects/stm32f10x_tim.crf
-Objects/stm32f10x_usart.crf
-Objects/stm32f10x_wwdg.crf
-Objects/system_stm32f10x.crf
-Objects/test_Target 1.dep
-Objects/test.axf
-Objects/test.build_log.htm
-Objects/test.htm
-Objects/test.lnp
-build/Target 1/axf2elf.log
-build/Target 1/builder.params
-build/Target 1/builder.params.old
-build/Target 1/compile_commands.json
-build/Target 1/compiler.log
-build/Target 1/ref.json
-build/Target 1/test.axf
-build/Target 1/test.bin
-build/Target 1/test.htm
-build/Target 1/test.lnp
-build/Target 1/test.map.old
-build/Target 1/test.map.view
-build/Target 1/test.objlist
-build/Target 1/test.s19
-build/Target 1/test.sct
-build/Target 1/unify_builder.log
-build/Target 1/Hardware/Buzzer.args.txt
-build/Target 1/Hardware/CountSensor.args.txt
-build/Target 1/Hardware/Encoder.args.txt
-build/Target 1/Hardware/IC.args.txt
-build/Target 1/Hardware/Key.args.txt
-build/Target 1/Hardware/LED.args.txt
-build/Target 1/Hardware/LightSensor.args.txt
-build/Target 1/Hardware/Motor.args.txt
-build/Target 1/Hardware/OLED.args.txt
-build/Target 1/Hardware/PWM.args.txt
-build/Target 1/Hardware/Servo.args.txt
-build/Target 1/Library/misc.args.txt
-build/Target 1/Library/stm32f10x_adc.args.txt
-build/Target 1/Library/stm32f10x_bkp.args.txt
-build/Target 1/Library/stm32f10x_can.args.txt
-build/Target 1/Library/stm32f10x_cec.args.txt
-build/Target 1/Library/stm32f10x_crc.args.txt
-build/Target 1/Library/stm32f10x_dac.args.txt
-build/Target 1/Library/stm32f10x_dbgmcu.args.txt
-build/Target 1/Library/stm32f10x_dma.args.txt
-build/Target 1/Library/stm32f10x_exti.args.txt
-build/Target 1/Library/stm32f10x_flash.args.txt
-build/Target 1/Library/stm32f10x_fsmc.args.txt
-build/Target 1/Library/stm32f10x_gpio.args.txt
-build/Target 1/Library/stm32f10x_i2c.args.txt
-build/Target 1/Library/stm32f10x_iwdg.args.txt
-build/Target 1/Library/stm32f10x_pwr.args.txt
-build/Target 1/Library/stm32f10x_rcc.args.txt
-build/Target 1/Library/stm32f10x_rtc.args.txt
-build/Target 1/Library/stm32f10x_sdio.args.txt
-build/Target 1/Library/stm32f10x_spi.args.txt
-build/Target 1/Library/stm32f10x_tim.args.txt
-build/Target 1/Library/stm32f10x_usart.args.txt
-build/Target 1/Library/stm32f10x_wwdg.args.txt
-build/Target 1/src/main.args.txt
-build/Target 1/start/core_cm3.args.txt
-build/Target 1/start/startup_stm32f10x_md.args.txt
-build/Target 1/start/stm32f10x_it.args.txt
-build/Target 1/start/system_stm32f10x.args.txt
-build/Target 1/sys/Delay.args.txt
-build/Target 1/sys/Timer.args.txt
+Objects/**
+build/**
