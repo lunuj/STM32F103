@@ -1,7 +1,7 @@
 /*
  * @Author: lunuj
  * @Date: 2023-09-30 13:24:05
- * @LastEditTime: 2023-09-30 15:07:07
+ * @LastEditTime: 2023-10-03 19:05:41
  * @FilePath: \test\Hardware\Serial.c
  * @Description: 串口通信
  * 
@@ -12,9 +12,14 @@
 #include <stdio.h>
 #include <stdarg.h>
 
-u16 RxData;
-u16 RxFlag;
+u16 RxFlag = 0;
 
+u8 TxCach[4];
+u8 RxCach[400];
+/**
+ * @brief 串口初始化
+ * @return {*}
+ */
 void Serial_Init(void){
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1, ENABLE);
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);
@@ -53,11 +58,22 @@ void Serial_Init(void){
 
 }
 
+/**
+ * @brief 向串口发送一个字节数据
+ * @param {u8} Byte
+ * @retval None
+ */
 void Serial_SendByte(u8 Byte){
     USART_SendData(USART1, Byte);
     while (USART_GetFlagStatus(USART1, USART_FLAG_TXE) == RESET);
 }
 
+/**
+ * @brief 向串口发送一组数组
+ * @param {u8} *Arrary: 数组地址
+ * @param {u16} Length: 数组长度
+ * @retval None
+ */
 void Serial_SendArrary(u8 *Arrary, u16 Length){
     for (int i = 0; i < Length; i++)
     {
@@ -82,6 +98,7 @@ void Serial_SendNum(int Num){
     Serial_SendByte(Num%10+'0');
 }
 
+
 int fputc(int ch, FILE *f){
     Serial_SendByte(ch);
     return ch;
@@ -97,11 +114,74 @@ void Serial_Printf(char *format, ...)
 	Serial_SendString(String);
 }
 
+void Serial_SendPack(void){
+    Serial_SendByte(0xFF);
+    Serial_SendArrary(TxCach, 4);
+    Serial_SendByte(0xFE);
+}
+
+void Serial_SetPack(u8 tx[4]){
+    for (int i = 0; i < 4; i++)
+    {
+        TxCach[i] = tx[i];
+    }
+}
+
 void USART1_IRQHandler(void){
+    static u8 RxState = 0;
+    static u8 pRxPack = 0;
     if(USART_GetFlagStatus(USART1, USART_IT_RXNE) == SET){
-        RxData = USART_ReceiveData(USART1);
-        RxFlag = 1;
-        USART_ClearITPendingBit(USART1, USART_IT_RXNE);
+        u8 RxData = USART_ReceiveData(USART1);
+        switch (RxState)
+        {
+        case 0:
+            if (RxData == 0xFF)
+            {
+                RxState = 1;
+            }
+            if (RxData == '@')
+            {
+                RxState = 11;
+            }
+            break;
+
+            
+        case 1:
+            RxCach[pRxPack++] = RxData;
+            if (pRxPack >= 4)
+            {
+                RxState = 2;
+                pRxPack = 0;
+            }
+            break;
+        case 2:
+            if (RxData == 0xFE)
+            {
+                RxState = 0;
+                RxFlag = 1;
+            }
+            break;
+
+            
+        case 11:
+            if (RxData == '\r')
+            {
+                RxState = 12;
+            } else {
+                RxCach[pRxPack++] = RxData;
+            }
+        case 12:
+            if (RxData == '\n')
+            {
+                RxState = 0;
+                RxCach[pRxPack++] = '\0';
+                pRxPack = 0;
+                RxFlag = 1;
+            }
+            
+        default:
+            break;
+        }
     }
 }
 
@@ -114,6 +194,6 @@ u8 Serial_GetRxFlag(void){
     return 0;
 }
 
-u8 Serial_GetRxData(void){
-    return RxData;
+u8* Serial_GetRxCach(void){
+    return RxCach;
 }
