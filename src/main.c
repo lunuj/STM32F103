@@ -1,7 +1,7 @@
 /*
  * @Author: lunuj
  * @Date: 2023-09-14 16:18:48
- * @LastEditTime: 2023-09-22 21:48:17
+ * @LastEditTime: 2023-10-03 16:50:31
  * @FilePath: \test\src\main.c
  * @Description: 
  * 
@@ -12,9 +12,8 @@
 #include "stm32f10x.h"
 #include "OLED.h"
 #include "Delay.h"
-int16_t tmp = 0;
-u8 keynum = 0;
-float angle = 0;
+#include "Serial.h"
+
 
 int main(void){
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOC, ENABLE);
@@ -29,11 +28,5 @@ int main(void){
 	OLED_Init();
 
 	OLED_ShowString(1,1,"Start:");
-	OLED_ShowString(2,1,"Count:");
-	OLED_ShowString(3,1," ");
 
-	while (1)
-	{
-
-	}
 }
