@@ -1,7 +1,7 @@
 /*
  * @Author: lunuj
  * @Date: 2023-09-30 13:24:05
- * @LastEditTime: 2023-10-03 19:05:41
+ * @LastEditTime: 2023-10-23 21:41:24
  * @FilePath: \test\Hardware\Serial.c
  * @Description: 串口通信
  * 
@@ -138,10 +138,14 @@ void USART1_IRQHandler(void){
             if (RxData == 0xFF)
             {
                 RxState = 1;
-            }
-            if (RxData == '@')
+            }else if (RxData == '@')
             {
                 RxState = 11;
+            }else{
+                RxCach[pRxPack++] = RxData;
+                RxState = 0;
+                pRxPack = 0;
+                RxFlag = 1;
             }
             break;
 
