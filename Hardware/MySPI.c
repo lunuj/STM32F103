@@ -7,18 +7,18 @@
  * @retval 无
  */
 void MySPI_Init(void){
-    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB, ENABLE);
+    RCC_APB2PeriphClockCmd(MySPI_CLK, ENABLE);
 
 	GPIO_InitTypeDef GPIO_InitStructure;
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
 	GPIO_InitStructure.GPIO_Pin = MySPI_SCK | MySPI_SS | MySPI_MOSI;
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-	GPIO_Init(GPIOB, &GPIO_InitStructure);
+	GPIO_Init(MySPI_GPIO, &GPIO_InitStructure);
 
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;
 	GPIO_InitStructure.GPIO_Pin = MySPI_MISO;
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-	GPIO_Init(GPIOB, &GPIO_InitStructure);
+	GPIO_Init(MySPI_GPIO, &GPIO_InitStructure);
 
     MySPI_W_SS(1);
     MySPI_W_SCK(0);
@@ -32,7 +32,7 @@ void MySPI_Init(void){
  * @retval 无
  */
 void MySPI_W_SS(u8 BitValue){
-    GPIO_WriteBit(GPIOB, MySPI_SS, (BitAction)BitValue);
+    GPIO_WriteBit(MySPI_GPIO, MySPI_SS, (BitAction)BitValue);
 }
 
 /**
@@ -41,7 +41,7 @@ void MySPI_W_SS(u8 BitValue){
  * @retval 无
  */
 void MySPI_W_SCK(u8 BitValue){
-    GPIO_WriteBit(GPIOB, MySPI_SCK, (BitAction)BitValue);
+    GPIO_WriteBit(MySPI_GPIO, MySPI_SCK, (BitAction)BitValue);
 }
 
 /**
@@ -50,7 +50,7 @@ void MySPI_W_SCK(u8 BitValue){
  * @retval 无
  */
 void MySPI_W_MOSI(u8 BitValue){
-    GPIO_WriteBit(GPIOB, MySPI_MOSI, (BitAction)BitValue);
+    GPIO_WriteBit(MySPI_GPIO, MySPI_MOSI, (BitAction)BitValue);
 }
 
 /**
@@ -58,7 +58,7 @@ void MySPI_W_MOSI(u8 BitValue){
  * @retval {u8} MISO的输入值
  */
 u8 MySPI_R_MISO(void){
-    return GPIO_ReadInputDataBit(GPIOB, MySPI_MISO);
+    return GPIO_ReadInputDataBit(MySPI_GPIO, MySPI_MISO);
 }
 
 /**
@@ -102,24 +102,24 @@ u8 MySPI_SwapByte(u8 ByteSwap){
 //硬件实现SPI通信
 
 void MySPIH_Init(void){
-    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);
+    RCC_APB2PeriphClockCmd(MySPI_CLK, ENABLE);
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_SPI1, ENABLE);
 
     GPIO_InitTypeDef GPIO_InitStructure;
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
 	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_4;
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-	GPIO_Init(GPIOA, &GPIO_InitStructure);
+	GPIO_Init(MySPI_GPIO, &GPIO_InitStructure);
 
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
 	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_5 | GPIO_Pin_7;
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-	GPIO_Init(GPIOA, &GPIO_InitStructure);
+	GPIO_Init(MySPI_GPIO, &GPIO_InitStructure);
 
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;
 	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_6;
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-	GPIO_Init(GPIOA, &GPIO_InitStructure);
+	GPIO_Init(MySPI_GPIO, &GPIO_InitStructure);
 
     SPI_InitTypeDef SPI_InitStructure;
     SPI_InitStructure.SPI_Mode = SPI_Mode_Master;
@@ -144,7 +144,7 @@ void MySPIH_Init(void){
  * @retval 无
  */
 void MySPIH_W_SS(u8 BitValue){
-    GPIO_WriteBit(GPIOA, MySPI_SS, (BitAction)BitValue);
+    GPIO_WriteBit(MySPI_GPIO, MySPI_SS, (BitAction)BitValue);
 }
 
 /**
