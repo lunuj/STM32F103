@@ -54,7 +54,7 @@ uint8_t DHT_Start(void)
   */
 uint8_t DHT_Get_Byte_Data(void)
 {
-	uint8_t temp;
+	uint8_t temp = 0;
 	for(int i = 0; i < 8; i++)
 	{
 		temp <<= 1;

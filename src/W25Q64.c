@@ -42,7 +42,7 @@ void W25Q64_WaitBusy(void){
     int TimeOut = 100000;
     MySPI_Start();
     MySPI_SwapByte(W25Q64_READ_STATUS_REGISTER_1);
-    while ((MySPI_SwapByte(W25Q64_DUMMY_BYTE) & 0x01 == 0x01) && TimeOut--!=0);
+    while (((MySPI_SwapByte(W25Q64_DUMMY_BYTE) & 0x01) == 0x01) && TimeOut--!=0);
     MySPI_Stop();
 }
 
